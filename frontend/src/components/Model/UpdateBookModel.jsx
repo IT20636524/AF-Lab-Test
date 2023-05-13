@@ -9,20 +9,16 @@ export default function UpdateBookModel(props) {
   const { updateBook } = LibraryState();
   const [title, setTitle] = useState(props.title);
   const [author, setAuthor] = useState(props.author);
-  const [publication_date, setPublication_date] = useState(
-    props.publication_date
-  );
-  const [available_copies, setAvailable_copies] = useState(
-    props.available_copies
-  );
+  const [publicationDate, setPublicationDate] = useState(props.publicationDate);
+  const [availableCopies, setAvailableCopies] = useState(props.availableCopies);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleUpdateBook = async (e) => {
     e.preventDefault();
-    console.log(title, author, publication_date, available_copies);
-    await updateBook(title, author, publication_date, available_copies).then(
+    console.log(title, author, publicationDate, availableCopies);
+    await updateBook(title, author, publicationDate, availableCopies).then(
       () => {
         alert("Book updated successfully");
         setShow(false);
@@ -47,40 +43,41 @@ export default function UpdateBookModel(props) {
               <Form.Control
                 type="text"
                 placeholder="Title"
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                disabled
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Author</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Author"
+                value={author}
                 onChange={(e) => setAuthor(e.target.value)}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Publication Date</Form.Label>
               <Form.Control
-                type="Date"
-                onChange={(e) => setPublication_date(e.target.value)}
+                type="text"
+                value={publicationDate}
+                onChange={(e) => setPublicationDate(e.target.value)}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Available Copies </Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 placeholder="Numer Of Available Copies"
-                onChange={(e) => setAvailable_copies(e.target.value)}
+                value={availableCopies}
+                onChange={(e) => setAvailableCopies(e.target.value)}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-
             <Button variant="primary" type="submit" onClick={handleUpdateBook}>
               Edit Book
             </Button>

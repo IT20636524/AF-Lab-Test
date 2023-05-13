@@ -4,9 +4,9 @@ const LibraryContext = createContext();
 
 const LibraryProvider = ({children}) => {
     const [books, setBooks] = useState([
-      { id: 1, title: "Book 1", author: "Author 1", publicationDate: "2021-10-10",availableCopies: 10},
-      { id: 2, title: "Book 2", author: "Author 2", publicationDate: "2021-10-10",availableCopies: 10},
-      { id: 3, title: "Book 3", author: "Author 3", publicationDate: "2021-10-10",availableCopies: 10},
+      { id: 1, title: "Book1", author: "Author 1", publicationDate: "2021-10-10",availableCopies: 10},
+      { id: 2, title: "Book2", author: "Author 2", publicationDate: "2021-10-10",availableCopies: 10},
+      { id: 3, title: "Book3", author: "Author 3", publicationDate: "2021-10-10",availableCopies: 10},
     ]);
 
     const [users, setUsers] = useState([
@@ -23,16 +23,17 @@ const LibraryProvider = ({children}) => {
     const updateBook = async (
       title,
       author,
-      publication_date,
-      available_copies
+      publicationDate,
+      availableCopies
     ) => {
       try {
         const updatedBook = {
           title,
           author,
-          publication_date,
-          available_copies,
+          publicationDate,
+          availableCopies,
         };
+        console.log(updatedBook);
 
         const updatedBooks = books.map((book) => {
           if (book.title === title) {
@@ -40,8 +41,9 @@ const LibraryProvider = ({children}) => {
           }
           return book;
         });
-
+        
         setBooks(updatedBooks);
+        console.log(updatedBooks);
         console.log("Book updated successfully");
       } catch (error) {
         console.log("Failed to update book:", error);
@@ -60,8 +62,8 @@ const LibraryProvider = ({children}) => {
     };
 
 
-    const viewOneBook = (id) => {
-      setBooks(books.filter((book) => book.id === id));
+    const viewOneBook = async(title) => {
+      setBooks(books.filter((book) => book.title === title));
     };
 
     return (

@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 import UpdateBookModel from "../components/Model/UpdateBookModel";
 
 export default function BookPage() {
-    const { books, updateBook, deleteBook } = LibraryState();
+    const { books, deleteBook } = LibraryState();
       const handleDeleteBook = async (btitle) => {
         console.log(btitle);
         await deleteBook(btitle).then(() => {
@@ -30,23 +30,26 @@ export default function BookPage() {
         <div className="row p-3">
           {books.map((book) => (
             <div className="col-sm-5">
-              <Card style={{ width: "12rem" }}>
-                <Card.Img
-                  className="mx-auto"
-                  variant="top"
-                  src={bookimg}
-                  style={{ width: "100px", height: "100px" }}
-                />
+              <Card style={{ width: "15rem" }}>
+                <a href={"/bookdetail/" + book.title}>
+                  <Card.Img
+                    className="mx-auto"
+                    variant="top"
+                    src={bookimg}
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </a>
                 <Card.Body>
                   <Card.Title className="text-center">{book.title}</Card.Title>
+                  <Card.Text className="text-center">{book.author}</Card.Text>
                 </Card.Body>
                 <Card.Body className="text-center">
                   <Card.Link href="#">
                     <UpdateBookModel
                       title={book.title}
                       author={book.author}
-                      publication_date={book.publication_date}
-                      available_copies={book.available_copies}
+                      publicationDate={book.publicationDate}
+                      availableCopies={book.availableCopies}
                     />
                   </Card.Link>
                   <Card.Link href="#">
