@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import UserPage from "./pages/UserPage";
 import BookPage from "./pages/BookPage";
 import UserDetailPage from "./pages/UserDetailPage";
+import BookDetailPage from "./pages/BookDetailPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/user" element={<UserPage />} />
           <Route path="/book" element={<BookPage />} />
           <Route path="/userdetail" element={<UserDetailPage />} />
+          <Route path='/bookdetail' element={<BookDetailPage />} />
         </Routes>
       </BrowserRouter>
     </>

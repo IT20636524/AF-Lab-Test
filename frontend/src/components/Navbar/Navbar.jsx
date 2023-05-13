@@ -6,7 +6,7 @@ import "./navbar.css";
 
 export default function Navigation() {
   return (
-    <div className="navbar-wrapper">
+    <div className="navbar-wrapper fixed-top">
       <Navbar bg="dark" variant="dark">
         <Container fluid>
           <Nav className="me-auto">
