@@ -9,9 +9,17 @@ import { LibraryState } from '../context/libraryProvider';
 export default function BookDetailPage() {
   const params = useParams();
   const title = params.title;
-  const { books } = LibraryState();
+  const { books, borrowBook, returnBook } = LibraryState();
 
   const book = books.find((book) => book.title === title);
+
+  const handleBorrowBook = () => {
+    borrowBook(book?.id);
+  };
+
+  const handleReturnBook = () => {
+    returnBook(book?.id);
+  };
 
   return (
     <div>
@@ -36,6 +44,8 @@ export default function BookDetailPage() {
             <ListGroup.Item>{book?.publicationDate}</ListGroup.Item>
           </ListGroup>
         </Card>
+        <button onClick={handleBorrowBook}>Borrow</button>
+        <button onClick={handleReturnBook}>Return</button>
       </div>
     </div>
   );

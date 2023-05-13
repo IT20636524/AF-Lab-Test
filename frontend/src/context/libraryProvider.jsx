@@ -15,6 +15,12 @@ const LibraryProvider = ({children}) => {
       { id: 3, name: "User 3", email: "Email 3", phone: "333333" },
     ]);
 
+    const [userbooks, setUserBooks] = useState([
+      { id: 1, userId: 1, bookId: 1, date: "2021-10-10" },
+      { id: 2, userId: 2, bookId: 2, date: "2021-10-10" },
+      { id: 3, userId: 3, bookId: 3, date: "2021-10-10" },
+    ]);
+
     const addBook = (title, author, publicationDate, availableCopies) => {
       const newBook = { title, author, publicationDate, availableCopies };
       setBooks([...books, newBook]);
@@ -61,14 +67,42 @@ const LibraryProvider = ({children}) => {
       }
     };
 
+    const borrowBook = (userId, bookId) => {
+      setBooks((prevBooks) =>
+        prevBooks.map((b) =>
+          b.id === bookId ? { ...b, availableCopies: b.availableCopies - 1 } : b
+        )
+      );
+      setUsers((prevUsers) =>
+        prevUsers.map((u) =>
+          u.id === userId
+            ? { ...u, borrowedBooks: [...u.borrowedBooks, bookId] }
+            : u
+        )
+      );
+    };
 
-    const viewOneBook = async(title) => {
-      setBooks(books.filter((book) => book.title === title));
+    const returnBook = (userId, bookId) => {
+      setBooks((prevBooks) =>
+        prevBooks.map((b) =>
+          b.id === bookId ? { ...b, availableCopies: b.availableCopies + 1 } : b
+        )
+      );
+      setUsers((prevUsers) =>
+        prevUsers.map((u) =>
+          u.id === userId
+            ? {
+                ...u,
+                borrowedBooks: u.borrowedBooks.filter((id) => id !== bookId),
+              }
+            : u
+        )
+      );
     };
 
     return (
       <LibraryContext.Provider
-        value={{ books, setBooks, users, setUsers, addBook, updateBook, deleteBook, viewOneBook }}
+        value={{ books, setBooks, users, setUsers, addBook, updateBook, deleteBook, borrowBook, returnBook }}
       >
         {children}
       </LibraryContext.Provider>
